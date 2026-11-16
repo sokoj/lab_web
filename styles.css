@@ -1,0 +1,398 @@
+/* =========================================================
+   Лабораторна №3 (Ч.1) + Лабораторна №4 (Ч.1). styles.css
+   Зміст: 1. Змінні (світла/нічна тема) 2. Скидання
+   3. Базові теги 4. Шапка і меню 5. Макет (Grid) 6. Картки
+   7. Атрибути 8. Футер 9. Відгуки 10. Модальне вікно
+   11. Медіазапит
+   ========================================================= */
+
+/* ---------- 1. Змінні (кольори й відступи в одному місці) ---------- */
+:root {
+  --color-bg: #f1f5f9;
+  --color-card: #ffffff;
+  --color-text: #1e293b;
+  --color-accent: #2563eb;
+  --color-accent-dark: #1d4ed8;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-dashed: #cbd5e1;
+  --color-stripe: #f8fafc;
+  --color-field: #ffffff;
+  --radius: 12px;
+  --gap: 20px;
+}
+
+/* Нічна тема (Лаб. 4): JS ставить на <html> атрибут data-theme="dark",
+   і всі змінні нижче перекривають світлі значення */
+:root[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-card: #1e293b;
+  --color-text: #e2e8f0;
+  --color-accent: #60a5fa;
+  --color-accent-dark: #93c5fd;
+  --color-muted: #94a3b8;
+  --color-border: #334155;
+  --color-dashed: #475569;
+  --color-stripe: #273449;
+  --color-field: #0f172a;
+}
+
+/* ---------- 2. Скидання + box-sizing ---------- */
+/* border-box: padding і border входять у ширину, а не збільшують її */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ---------- 3. Базові стилі: СЕЛЕКТОРИ ТЕГІВ ---------- */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2, h3 {
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* ПСЕВДОКЛАС 1: :hover — курсор над елементом */
+a:hover {
+  text-decoration: underline;
+  color: var(--color-accent-dark);
+}
+
+/* ПСЕВДОКЛАС 2: :focus — елемент у фокусі (Tab на клавіатурі) */
+a:focus {
+  outline: 3px solid #facc15;
+  outline-offset: 2px;
+}
+
+/* ---------- 4. Шапка і меню (FLEXBOX) ---------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+  padding: 28px 40px;
+  color: #fff;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+:root[data-theme="dark"] .site-header {
+  background: linear-gradient(135deg, #0b1220, #1e3a8a);
+}
+
+.site-header h1 {
+  font-size: 2rem;
+}
+
+.subtitle {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main-nav a {
+  color: #fff;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+}
+
+.main-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Кнопка перемикання теми (Лаб. 4) */
+.theme-toggle {
+  font: inherit;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- 5. Макет сторінки (CSS GRID) ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--gap);
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.sidebar,
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* ---------- 6. Картки: БЛОКОВА МОДЕЛЬ ---------- */
+.card {
+  margin: 0;
+  padding: 22px 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-card);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+/* СЕЛЕКТОР ID: унікальний елемент на сторінці */
+#about {
+  border-left: 6px solid var(--color-accent);
+}
+
+.job {
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--color-dashed);
+}
+
+/* ПСЕВДОКЛАС 3: :last-child — прибираємо лінію в останньому блоці */
+.job:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.job__meta {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.contact-list,
+.skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-list li {
+  padding: 4px 0;
+}
+
+/* ПСЕВДОКЛАС 4: :nth-child(even) — кожен парний пункт */
+.contact-list li:nth-child(even) {
+  background-color: var(--color-stripe);
+}
+
+/* ---------- 7. СЕЛЕКТОРИ АТРИБУТІВ ---------- */
+a[target="_blank"]::after {
+  content: " ↗";
+}
+
+a[href^="https"] {
+  font-weight: 600;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.skills li {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.skills li[data-level="expert"] { background-color: #16a34a; }
+.skills li[data-level="middle"] { background-color: #2563eb; }
+.skills li[data-level="basic"]  { background-color: #f59e0b; }
+
+/* ---------- 8. Футер ---------- */
+.site-footer {
+  padding: 20px;
+  text-align: center;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Інформація про систему з localStorage (Лаб. 4) */
+.storage-info {
+  max-width: 1100px;
+  margin: 16px auto 0;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.storage-info h3 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.storage-info dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 2px 14px;
+  margin: 0;
+}
+
+.storage-info dt {
+  font-weight: 600;
+}
+
+.storage-info dd {
+  margin: 0;
+  overflow-wrap: anywhere; /* довгий userAgent переноситься */
+}
+
+/* ---------- 9. Відгуки роботодавців (Лаб. 4) ---------- */
+.reviews-list {
+  display: grid;
+  gap: 14px;
+}
+
+.review {
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 8px;
+}
+
+.review__name {
+  margin: 0;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.review__email {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.review__body {
+  margin: 0;
+  white-space: pre-line; /* зберігаємо переноси рядків із відповіді сервера */
+}
+
+/* ---------- 10. Модальне вікно форми (Лаб. 4) ---------- */
+.modal {
+  width: min(480px, 92vw);
+  padding: 24px;
+  color: var(--color-text);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.modal::backdrop {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.modal input,
+.modal textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-field);
+  border: 1px solid var(--color-dashed);
+  border-radius: 8px;
+}
+
+.modal__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  font: inherit;
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--color-accent);
+}
+
+.btn--primary {
+  color: #fff;
+  background: var(--color-accent);
+}
+
+:root[data-theme="dark"] .btn--primary {
+  color: #0f172a;
+}
+
+.btn--secondary {
+  color: var(--color-accent);
+  background: transparent;
+}
+
+/* ---------- 11. МЕДІАЗАПИТ: вузький екран (телефон) ---------- */
+@media (max-width: 768px) {
+  .site-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

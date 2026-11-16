@@ -3,33 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Моє резюме</title>
+  <title>Резюме — Денис Дубковецький</title>
+
+  <!-- Спосіб 1: ЗОВНІШНІЙ файл стилів (тут лежить основна частина правил) -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Спосіб 2: ВНУТРІШНІ стилі (блок <style> усередині HTML) -->
+  <style>
+    .skills-note {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #64748b;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Денис Дубковецький</h1>
-    <p>Студент</p>
+  <header class="site-header" id="top">
+    <div class="site-header__text">
+      <!-- Спосіб 3: ВБУДОВАНІ стилі (атрибут style прямо на елементі) -->
+      <h1 style="letter-spacing: 2px;">Денис Дубковецький</h1>
+      <p class="subtitle">Студент ІКТА, група КБ-209</p>
+    </div>
+    <nav class="main-nav">
+      <a href="#about">Про мене</a>
+      <a href="#experience">Досвід</a>
+      <a href="#education">Освіта</a>
+      <a href="#reviews">Відгуки</a>
+      <a href="#feedback">Зв'язок</a>
+      <a href="#contacts">Контакти</a>
+      <!-- Лаб. 4, завдання 4: кнопка ручного перемикання теми -->
+      <button type="button" id="theme-toggle" class="theme-toggle">🌙 Нічна тема</button>
+    </nav>
   </header>
-  <main>
-    <section>
-      <h2>Про мене</h2>
-      <p>Я студент, вивчаю програмування/вебпрограмування/комп'терні мережі.</p>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <section id="contacts" class="card">
+        <h2>Контакти</h2>
+        <ul class="contact-list">
+          <li>Львів, Україна</li>
+          <li><a href="mailto:denys@example.com">denys@example.com</a></li>
+          <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Навички</h2>
+        <ul class="skills">
+          <li data-level="expert">HTML</li>
+          <li data-level="middle">CSS</li>
+          <li data-level="middle">JavaScript</li>
+          <li data-level="middle">Python</li>
+          <li data-level="basic">Java</li>
+          <li data-level="basic">C</li>
+        </ul>
+        <p class="skills-note">Колір плашки показує рівень володіння.</p>
+      </section>
+    </aside>
+
+    <main class="content">
+      <section id="about" class="card">
+        <h2>Про мене</h2>
+        <p>Я студент ІКТА (група КБ-209), вивчаю програмування/вебпрограмування/комп'ютерні мережі</p>
+      </section>
+
+      <section id="experience" class="card">
+        <h2>Досвід роботи</h2>
+        <article class="job">
+          <h3>Продавець-консультант</h3>
+          <p class="job__meta">2023</p>
+        </article>
+      </section>
+
+      <section id="education" class="card">
+        <h2>Освіта</h2>
+        <article class="job">
+          <h3>Університет</h3>
+          <p class="job__meta">2024 – 2028</p>
+        </article>
+      </section>
+
+      <!-- Лаб. 4, завдання 2: сюди script.js додасть коментарі з сервера -->
+      <section id="reviews" class="card">
+        <h2>Відгуки попередніх роботодавців</h2>
+        <div id="reviews-list" class="reviews-list">
+          <p>Завантаження відгуків…</p>
+        </div>
+      </section>
+      <!-- Лаб. 4, завдання 3: видима секція з кнопкою, що відкриває модальну форму -->
+      <section id="feedback" class="card">
+        <h2>Зворотний зв'язок</h2>
+        <p>Є питання чи пропозиція? Напишіть мені. Форма також відкривається автоматично через 1 хвилину перебування на сайті.</p>
+        <button type="button" id="open-feedback" class="btn btn--primary">Написати</button>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2026 Денис Дубковецький · <a href="#top">Нагору ↑</a></p>
+
+    <!-- Лаб. 4, завдання 1: сюди script.js виводить усе, що лежить у localStorage -->
+    <section class="storage-info">
+      <h3>Інформація про систему та браузер (localStorage)</h3>
+      <dl id="storage-info-list"></dl>
     </section>
-    <section>
-      <h2>Досвід роботи</h2>
-      <ul>
-        <li>Продавець-консультант, 2023</li>
-      </ul>
-    </section>
-    <section>
-      <h2>Освіта</h2>
-      <ul>
-        <li>Університет, 2024 – 2028</li>
-      </ul>
-    </section>
-  </main>
-  <footer>
-    <p>Пошта: <a href="mailto:denys@example.com">denys@example.com</a></p>
   </footer>
+
+  <!-- Лаб. 4, завдання 3: модальне вікно форми зворотного зв'язку.
+       Показується через 1 хвилину. Замініть ВАШ_ЕНДПОЙНТ на свій з Formspree! -->
+  <dialog id="feedback-modal" class="modal">
+    <h2>Зворотний зв'язок</h2>
+    <form id="feedback-form" action="https://formspree.io/f/ВАШ_ЕНДПОЙНТ" method="POST">
+      <label>Ім'я
+        <input type="text" name="name" required>
+      </label>
+      <label>Email
+        <input type="email" name="email" required>
+      </label>
+      <label>Номер телефону
+        <input type="tel" name="phone">
+      </label>
+      <label>Повідомлення
+        <textarea name="message" rows="4" required></textarea>
+      </label>
+      <!-- службове поле Formspree: тема листа -->
+      <input type="hidden" name="_subject" value="Відгук із сайту-резюме (Лаб. 4, чистий JS)">
+      <div class="modal__buttons">
+        <button type="button" id="feedback-close" class="btn btn--secondary">Закрити</button>
+        <button type="submit" class="btn btn--primary">Надіслати</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Лаб. 4: весь JavaScript в окремому файлі. defer = виконати після розбору HTML -->
+  <script src="script.js" defer></script>
 </body>
 </html>
