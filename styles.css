@@ -11,7 +11,7 @@
   --color-bg: #f1f5f9;
   --color-card: #ffffff;
   --color-text: #1e293b;
-  --color-accent: #2563eb;
+  --color-accent: #7c3aed;
   --color-accent-dark: #1d4ed8;
   --color-muted: #64748b;
   --color-border: #e2e8f0;
@@ -97,7 +97,7 @@ a:focus {
   gap: var(--gap);
   padding: 28px 40px;
   color: #fff;
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
 }
 
 :root[data-theme="dark"] .site-header {
